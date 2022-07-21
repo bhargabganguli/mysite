@@ -1,0 +1,82 @@
+<html>
+    <head>
+    <title>mmm output</title>
+</head>
+<body style="background-color:powderblue;">
+    <style>
+        div {text-align: center;
+            font-weight: bold;}
+        input {text-align: center;}
+        select{
+        width: 500px;
+        margin: 10px;
+        }
+    </style>
+
+<h1>size of the uploaded dataset is: 
+    no. of columns:{{columns}}, no. of rows:{{rows}}</h1>
+    <br>
+    <h5>columns are</h5>
+
+    <table>
+    <tr>
+    {% for i in col_name %}
+    <td>{{i}}</td> 
+    {% endfor %}
+    </tr>
+    </table>
+    
+    
+    <form style="background-color:#FF9933" method="POST" action="/scatter" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <h2>See scatterplot </h2>
+        <select id ="columns" name="column1">
+        {% for i in col_name %}
+        <option value="{{i}}">{{i}}</option>
+        {% endfor %}
+        </select>
+        
+        <select id ="columns" name="column2">
+        {% for i in col_name %}
+        <option value="{{i}}">{{i}}</option>
+        {% endfor %}
+        </select>
+        <br>
+        <input type="submit" name="submit data">
+    </form>
+    
+    
+    
+     <form style="background-color:#FFFFFF" method="POST" action="/histogram" enctype="multipart/form-data">
+         {% csrf_token %}
+         
+         <h2>See histogram frequency plot </h2>
+      
+         <select id ="columns" name="column1">
+         
+         {% for i in col_name %}
+         <option value="{{i}}">{{i}}</option>
+         {% endfor %}
+         </select>
+        
+         <img width=100 src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Spinning_Ashoka_Chakra.gif?20120315182810">
+         <br>
+         <input type="submit" name="submit data">
+     </form>
+     
+     <form style="background-color:138808" method="POST" action="/boxplot" enctype="multipart/form-data">
+         {% csrf_token %}
+         
+         <h2>See boxplot frequency plot </h2>
+         <select id ="columns" name="column1">
+         {% for i in col_name %}
+         <option value="{{i}}">{{i}}</option>
+         {% endfor %}
+         </select>
+         <br>
+         <input type="submit" name="submit data">
+     </form>
+</body>
+
+</html>
